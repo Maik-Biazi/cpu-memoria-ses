@@ -4,22 +4,16 @@ import psutil
 import boto3
 
 # Configurar as credenciais do AWS SES
-aws_access_key = 'AKIAYURVOFAAOGIEIMWK'
-aws_secret_key = '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'
+aws_access_key = 'ACESS_KEY'
+aws_secret_key = 'SECRET_KEY'
 aws_region = 'us-east-1'  # Substitua pelo seu região da AWS
 
-# ...
 
-def get_disk_usage():
-    disk_info = psutil.disk_usage('/')
-    disk_total = disk_info.total / (1024 ** 3)  # Converter para gigabytes
-    disk_free = disk_info.free / (1024 ** 3)  # Converter para gigabytes
-    return disk_total, disk_free
-
-# ...
 
 # Configurar o cliente AWS SES
-ses_client = boto3.client('ses', region_name=aws_region, aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_key)
+ses_client = boto3.client('ses', region_name=aws_region,
+ aws_access_key_id=aws_access_key, 
+ aws_secret_access_key=aws_secret_key)
 
 # Variável para controlar o tempo do último envio de e-mail
 last_email_time = 0
@@ -33,6 +27,16 @@ def get_formatted_uptime():
     uptime_minutes, _ = divmod(uptime_remainder, 60)
     uptime_formatted = f"{uptime_days} dias, {uptime_hours} horas, {uptime_minutes} minutos"
     return uptime_formatted
+
+# ...
+
+def get_disk_usage():
+    disk_info = psutil.disk_usage('/')
+    disk_total = disk_info.total / (1024 ** 3)  # Converter para gigabytes
+    disk_free = disk_info.free / (1024 ** 3)  # Converter para gigabytes
+    return disk_total, disk_free
+
+# ...
 
 
 # Obter os processos mais intensivos em memória RAM e CPU
@@ -56,11 +60,9 @@ while True:
     memory_info = psutil.virtual_memory()
     memory_used_percent = memory_info.percent
 
-     # Obter o uso da memória RAM
-    memory_info = psutil.virtual_memory()
-    memory_used_percent = memory_info.percent
 
-       # Obter o espaço total e livre em disco
+
+    # Obter o espaço total e livre em disco
     disk_total, disk_free = get_disk_usage()
 
 
@@ -93,9 +95,9 @@ while True:
 
         # Enviar o e-mail
         response = ses_client.send_email(
-            Source='maikwilliam4553@gmail.com',
+            Source='exemplo@gmail.com',
             Destination={
-                'ToAddresses': ['seubanbi@gmail.com']
+                'ToAddresses': ['destinatorio@gmail.com']
             },
             Message={
                 'Subject': {
