@@ -1,2 +1,2 @@
 # cpu-memoria-ses
- recebdo os dados da cpu e momoria e enviando por email com SES
+ recebendo os dados da cpu e memoria e enviando por email com Amazon SES
